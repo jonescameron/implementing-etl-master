@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Mod3 SSIS Demos", "Mod3 SSIS Demos\Mod3 SSIS Demos.dtproj", "{A80AFEA8-C5FC-4563-BD87-29A339BDE2FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBScripts", "DBScripts", "{923D1E5A-E90A-4AC7-BA87-EA00B781C7C7}"
+	ProjectSection(SolutionItems) = preProject
+		DBScripts\Create the DWAdventureWorksLTSales database V1.sql = DBScripts\Create the DWAdventureWorksLTSales database V1.sql
+		DBScripts\SqlCodefForUsingStoredProcedureDemo.sql = DBScripts\SqlCodefForUsingStoredProcedureDemo.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A80AFEA8-C5FC-4563-BD87-29A339BDE2FA}.Development|Default.ActiveCfg = Development
+		{A80AFEA8-C5FC-4563-BD87-29A339BDE2FA}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

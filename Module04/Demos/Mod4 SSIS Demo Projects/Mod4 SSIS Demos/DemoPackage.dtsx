@@ -1,0 +1,1841 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/21/2016 10:24:39 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP01"
+  DTS:CreatorName="DESKTOP01\randal"
+  DTS:DTSID="{E37F6F9A-A26E-442E-8C07-85DA1C84F0B7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DemoPackage"
+  DTS:PackageType="5"
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{6182E872-80B6-408B-8526-7466D8D9A79F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{B9917561-C92E-4693-A4A4-405117480664}"
+      DTS:ObjectName="localhost.DWAdventureWorksLT2012v1ADONET">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWAdventureWorksLT2012v1;Integrated Security=True;Application Name=SSIS-DemoPackage-{B9917561-C92E-4693-A4A4-405117480664}localhost.DWAdventureWorksLT2012v11;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1OLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{641908E3-A285-4DBE-A305-1B9DF2FDB704}"
+      DTS:ObjectName="localhost.DWAdventureWorksLT2012v1OLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWAdventureWorksLT2012v1;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-DemoPackage-{641908E3-A285-4DBE-A305-1B9DF2FDB704}localhost.DWAdventureWorksLT2012v1;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Fill Fact Tables Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{03200DB7-65F6-4956-99CE-901DF7D844A1}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Fill Fact Tables Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{F0367F27-EC71-4C9B-9947-643F54006FBA}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill FactSales Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+                  name="FactSales ADO NET Destination"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The Destination database table name."
+                      expressionType="Notify"
+                      name="TableOrViewName"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."FactSales"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                      expressionType="Notify"
+                      name="BatchSize">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                      expressionType="Notify"
+                      name="CommandTimeout">30</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                      expressionType="Notify"
+                      name="UseBulkInsertWhenPossible">true</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Connections[IDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      description="Managed connection manager"
+                      name="IDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input]"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="ADO NET Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].Columns[SalesOrderID]"
+                          cachedDataType="i4"
+                          cachedName="SalesOrderID"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesOrderID]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesOrderID]" />
+                        <inputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].Columns[SalesOrderDetailID]"
+                          cachedDataType="i4"
+                          cachedName="SalesOrderDetailID"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesOrderDetailID]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesOrderDetailID]" />
+                        <inputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].Columns[OrderDateKey]"
+                          cachedDataType="i4"
+                          cachedName="OrderDateKey"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[OrderDateKey]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[OrderDateKey]" />
+                        <inputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ShipDateKey]"
+                          cachedDataType="i4"
+                          cachedName="ShipDateKey"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ShipDateKey]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[ShipDateKey]" />
+                        <inputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].Columns[CustomerKey]"
+                          cachedDataType="i4"
+                          cachedName="CustomerKey"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[CustomerKey]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[CustomerKey]" />
+                        <inputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductKey]"
+                          cachedDataType="i4"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductKey]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductKey]" />
+                        <inputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].Columns[OrderQty]"
+                          cachedDataType="i2"
+                          cachedName="OrderQty"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[OrderQty]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[OrderQty]" />
+                        <inputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].Columns[UnitPrice]"
+                          cachedDataType="cy"
+                          cachedName="UnitPrice"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[UnitPrice]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[UnitPrice]" />
+                        <inputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].Columns[UnitPriceDiscount]"
+                          cachedDataType="cy"
+                          cachedName="UnitPriceDiscount"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[UnitPriceDiscount]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[UnitPriceDiscount]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesOrderID]"
+                          dataType="i4"
+                          name="SalesOrderID" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesOrderDetailID]"
+                          dataType="i4"
+                          name="SalesOrderDetailID" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[OrderDateKey]"
+                          dataType="i4"
+                          name="OrderDateKey" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ShipDateKey]"
+                          dataType="i4"
+                          name="ShipDateKey" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[CustomerKey]"
+                          dataType="i4"
+                          name="CustomerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductKey]"
+                          dataType="i4"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[OrderQty]"
+                          dataType="i2"
+                          name="OrderQty" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[UnitPrice]"
+                          dataType="numeric"
+                          name="UnitPrice"
+                          precision="19"
+                          scale="255" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[UnitPriceDiscount]"
+                          dataType="numeric"
+                          name="UnitPriceDiscount"
+                          precision="19"
+                          scale="255" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Outputs[ADO NET Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="ADO NET Destination Error Output"
+                      synchronousInputId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+                  name="vETLFactSale ADO NET Source"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement used by the component to extract data."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">30</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                      name="AllowImplicitStringConversion">true</property>
+                    <property
+                      dataType="System.String"
+                      description="The Source database table name."
+                      expressionType="Notify"
+                      name="TableOrViewName"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."vETLFactSales"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the mode to retrieve external column information"
+                      name="AccessMode"
+                      typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Connections[IDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      description="Managed connection manager"
+                      name="IDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output]"
+                      name="ADO NET Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesOrderID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SalesOrderID]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesOrderID]"
+                          name="SalesOrderID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesOrderDetailID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SalesOrderDetailID]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesOrderDetailID]"
+                          name="SalesOrderDetailID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[OrderDateKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OrderDateKey]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[OrderDateKey]"
+                          name="OrderDateKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[ShipDateKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ShipDateKey]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[ShipDateKey]"
+                          name="ShipDateKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[CustomerKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CustomerKey]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[CustomerKey]"
+                          name="CustomerKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductKey]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductKey]"
+                          name="ProductKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[OrderQty]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OrderQty]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[OrderQty]"
+                          name="OrderQty"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[UnitPrice]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[UnitPrice]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[UnitPrice]"
+                          name="UnitPrice"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[UnitPriceDiscount]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[UnitPriceDiscount]"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].Columns[UnitPriceDiscount]"
+                          name="UnitPriceDiscount"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SalesOrderID]"
+                          dataType="i4"
+                          name="SalesOrderID" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SalesOrderDetailID]"
+                          dataType="i4"
+                          name="SalesOrderDetailID" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OrderDateKey]"
+                          dataType="i4"
+                          name="OrderDateKey" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ShipDateKey]"
+                          dataType="i4"
+                          name="ShipDateKey" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CustomerKey]"
+                          dataType="i4"
+                          name="CustomerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductKey]"
+                          dataType="i4"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OrderQty]"
+                          dataType="i2"
+                          name="OrderQty" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[UnitPrice]"
+                          dataType="cy"
+                          name="UnitPrice" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[UnitPriceDiscount]"
+                          dataType="cy"
+                          name="UnitPriceDiscount" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output]"
+                      isErrorOut="true"
+                      name="ADO NET Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SalesOrderID]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SalesOrderID]"
+                          name="SalesOrderID" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SalesOrderDetailID]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SalesOrderDetailID]"
+                          name="SalesOrderDetailID" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[OrderDateKey]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[OrderDateKey]"
+                          name="OrderDateKey" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ShipDateKey]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ShipDateKey]"
+                          name="ShipDateKey" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CustomerKey]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CustomerKey]"
+                          name="CustomerKey" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductKey]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductKey]"
+                          name="ProductKey" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[OrderQty]"
+                          dataType="i2"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[OrderQty]"
+                          name="OrderQty" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[UnitPrice]"
+                          dataType="cy"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[UnitPrice]"
+                          name="UnitPrice" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[UnitPriceDiscount]"
+                          dataType="cy"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[UnitPriceDiscount]"
+                          name="UnitPriceDiscount" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task.Paths[ADO NET Source Output]"
+                  endId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination.Inputs[ADO NET Destination Input]"
+                  name="ADO NET Source Output"
+                  startId="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source.Outputs[ADO NET Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Dimension Tables Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{3F04AE0A-EE0B-4CE7-8D4E-AD15136A6E48}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Dimension Tables Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{7F449048-8CC5-48FF-A167-B74B72064930}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimCustomers Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+                  name="DimCustomers ADO NET Destination"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The Destination database table name."
+                      expressionType="Notify"
+                      name="TableOrViewName"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."DimCustomers"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                      expressionType="Notify"
+                      name="BatchSize">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                      expressionType="Notify"
+                      name="CommandTimeout">30</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                      expressionType="Notify"
+                      name="UseBulkInsertWhenPossible">true</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Connections[IDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      description="Managed connection manager"
+                      name="IDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input]"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="ADO NET Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[CustomerID]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[CustomerID]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ContactFullName]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="ContactFullName"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ContactFullName]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[ContactFullName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].Columns[CompanyName]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="CompanyName"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[CompanyName]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[CompanyName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].Columns[SalesPersonAlias]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="SalesPersonAlias"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesPersonAlias]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesPersonAlias]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[CustomerKey]"
+                          dataType="i4"
+                          name="CustomerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[CustomerID]"
+                          dataType="i4"
+                          name="CustomerID" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ContactFullName]"
+                          dataType="wstr"
+                          length="200"
+                          name="ContactFullName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[CompanyName]"
+                          dataType="wstr"
+                          length="200"
+                          name="CompanyName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesPersonAlias]"
+                          dataType="wstr"
+                          length="200"
+                          name="SalesPersonAlias" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Outputs[ADO NET Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="ADO NET Destination Error Output"
+                      synchronousInputId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+                  name="vETLDimCustomers ADO NET Source"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement used by the component to extract data."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">30</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                      name="AllowImplicitStringConversion">true</property>
+                    <property
+                      dataType="System.String"
+                      description="The Source database table name."
+                      expressionType="Notify"
+                      name="TableOrViewName"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."vETLDimCustomers"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the mode to retrieve external column information"
+                      name="AccessMode"
+                      typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Connections[IDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      description="Managed connection manager"
+                      name="IDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output]"
+                      name="ADO NET Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[CustomerID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CustomerID]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[CustomerID]"
+                          name="CustomerID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[ContactFullName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ContactFullName]"
+                          length="200"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[ContactFullName]"
+                          name="ContactFullName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[CompanyName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CompanyName]"
+                          length="200"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[CompanyName]"
+                          name="CompanyName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesPersonAlias]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SalesPersonAlias]"
+                          length="200"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesPersonAlias]"
+                          name="SalesPersonAlias"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CustomerID]"
+                          dataType="i4"
+                          name="CustomerID" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ContactFullName]"
+                          dataType="wstr"
+                          length="200"
+                          name="ContactFullName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CompanyName]"
+                          dataType="wstr"
+                          length="200"
+                          name="CompanyName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SalesPersonAlias]"
+                          dataType="wstr"
+                          length="200"
+                          name="SalesPersonAlias" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output]"
+                      isErrorOut="true"
+                      name="ADO NET Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CustomerID]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CustomerID]"
+                          name="CustomerID" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ContactFullName]"
+                          dataType="wstr"
+                          length="200"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ContactFullName]"
+                          name="ContactFullName" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CompanyName]"
+                          dataType="wstr"
+                          length="200"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CompanyName]"
+                          name="CompanyName" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SalesPersonAlias]"
+                          dataType="wstr"
+                          length="200"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SalesPersonAlias]"
+                          name="SalesPersonAlias" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task.Paths[ADO NET Source Output]"
+                  endId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination.Inputs[ADO NET Destination Input]"
+                  name="ADO NET Source Output"
+                  startId="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source.Outputs[ADO NET Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{F947217B-0E34-4D96-B90E-BA0D1E0E3BE9}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimProducts Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+                  description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+                  name="DimProducts ADO NET Destination"
+                  usesDispositions="true"
+                  version="2">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The Destination database table name."
+                      expressionType="Notify"
+                      name="TableOrViewName"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."DimProducts"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                      expressionType="Notify"
+                      name="BatchSize">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                      expressionType="Notify"
+                      name="CommandTimeout">30</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                      expressionType="Notify"
+                      name="UseBulkInsertWhenPossible">true</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Connections[IDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      description="Managed connection manager"
+                      name="IDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input]"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="ADO NET Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductID]"
+                          cachedDataType="i4"
+                          cachedName="ProductID"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductID]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductID]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ProductName"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductName]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductColor]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ProductColor"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductColor]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductColor]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductSize]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ProductSize"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductSize]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSize]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductSellingStartDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="ProductSellingStartDate"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductSellingStartDate]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSellingStartDate]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductSellingEndDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="ProductSellingEndDate"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductSellingEndDate]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSellingEndDate]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductSellingEndDateText]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ProductSellingEndDateText"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductSellingEndDateText]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSellingEndDateText]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductCategoryID]"
+                          cachedDataType="i4"
+                          cachedName="ProductCategoryID"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductCategoryID]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductCategoryID]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ProductCategoryName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ProductCategoryName"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductCategoryName]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductCategoryName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ParentProductCategoryName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ParentProductCategoryName"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ParentProductCategoryName]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ParentProductCategoryName]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductKey]"
+                          dataType="i4"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductID]"
+                          dataType="i4"
+                          name="ProductID" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductName]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductColor]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductColor" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductSize]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductSize" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductSellingStartDate]"
+                          dataType="dbTimeStamp"
+                          name="ProductSellingStartDate" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductSellingEndDate]"
+                          dataType="dbTimeStamp"
+                          name="ProductSellingEndDate" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductSellingEndDateText]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductSellingEndDateText" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductCategoryID]"
+                          dataType="i4"
+                          name="ProductCategoryID" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ProductCategoryName]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductCategoryName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ParentProductCategoryName]"
+                          dataType="wstr"
+                          length="50"
+                          name="ParentProductCategoryName" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Outputs[ADO NET Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="ADO NET Destination Error Output"
+                      synchronousInputId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+                  name="vETLDimProducts ADO NET Source"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement used by the component to extract data."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">30</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                      name="AllowImplicitStringConversion">true</property>
+                    <property
+                      dataType="System.String"
+                      description="The Source database table name."
+                      expressionType="Notify"
+                      name="TableOrViewName"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."vETLDimProducts"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the mode to retrieve external column information"
+                      name="AccessMode"
+                      typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Connections[IDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.DWAdventureWorksLT2012v1ADONET]"
+                      description="Managed connection manager"
+                      name="IDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output]"
+                      name="ADO NET Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductID]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductID]"
+                          name="ProductID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductName]"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductName]"
+                          name="ProductName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductColor]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductColor]"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductColor]"
+                          name="ProductColor"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSize]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductSize]"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSize]"
+                          name="ProductSize"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSellingStartDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductSellingStartDate]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSellingStartDate]"
+                          name="ProductSellingStartDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSellingEndDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductSellingEndDate]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSellingEndDate]"
+                          name="ProductSellingEndDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSellingEndDateText]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductSellingEndDateText]"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductSellingEndDateText]"
+                          name="ProductSellingEndDateText"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductCategoryID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductCategoryID]"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductCategoryID]"
+                          name="ProductCategoryID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductCategoryName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductCategoryName]"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ProductCategoryName]"
+                          name="ProductCategoryName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ParentProductCategoryName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ParentProductCategoryName]"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].Columns[ParentProductCategoryName]"
+                          name="ParentProductCategoryName"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductID]"
+                          dataType="i4"
+                          name="ProductID" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductName]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductColor]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductColor" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductSize]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductSize" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductSellingStartDate]"
+                          dataType="dbTimeStamp"
+                          name="ProductSellingStartDate" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductSellingEndDate]"
+                          dataType="dbTimeStamp"
+                          name="ProductSellingEndDate" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductSellingEndDateText]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductSellingEndDateText" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductCategoryID]"
+                          dataType="i4"
+                          name="ProductCategoryID" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProductCategoryName]"
+                          dataType="wstr"
+                          length="50"
+                          name="ProductCategoryName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ParentProductCategoryName]"
+                          dataType="wstr"
+                          length="50"
+                          name="ParentProductCategoryName" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output]"
+                      isErrorOut="true"
+                      name="ADO NET Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductID]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductID]"
+                          name="ProductID" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductName]"
+                          name="ProductName" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductColor]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductColor]"
+                          name="ProductColor" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductSize]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductSize]"
+                          name="ProductSize" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductSellingStartDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductSellingStartDate]"
+                          name="ProductSellingStartDate" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductSellingEndDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductSellingEndDate]"
+                          name="ProductSellingEndDate" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductSellingEndDateText]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductSellingEndDateText]"
+                          name="ProductSellingEndDateText" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductCategoryID]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductCategoryID]"
+                          name="ProductCategoryID" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductCategoryName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProductCategoryName]"
+                          name="ProductCategoryName" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ParentProductCategoryName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ParentProductCategoryName]"
+                          name="ParentProductCategoryName" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task.Paths[ADO NET Source Output]"
+                  endId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination.Inputs[ADO NET Destination Input]"
+                  name="ADO NET Source Output"
+                  startId="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source.Outputs[ADO NET Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Post-Load Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{176289E5-D22A-46A3-B5CA-EE8B2E3FDC12}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Post-Load Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Post-Load Sequence Container\Replace Foreign Keys Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E464F159-34FC-4FD7-AF7E-5D5CAC95B8DE}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Replace Foreign Keys Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{641908E3-A285-4DBE-A305-1B9DF2FDB704}"
+              SQLTask:SqlStatementSource="ALTER TABLE dbo.FactSales ADD CONSTRAINT&#xA;&#x9;fkFactSalesToDimProducts FOREIGN KEY (ProductKey) &#xA;&#x9;REFERENCES dbo.DimProducts&#x9;(ProductKey);&#xA;&#xA;ALTER TABLE dbo.FactSales ADD CONSTRAINT &#xA;&#x9;fkFactSalesToDimCustomers FOREIGN KEY (CustomerKey) &#xA;&#x9;REFERENCES dbo.DimCustomers (CustomerKey);&#xA;&#xA;ALTER TABLE dbo.FactSales ADD CONSTRAINT&#xA;&#x9;fkFactSalesOrderDateToDimDates FOREIGN KEY (OrderDateKey) &#xA;&#x9;REFERENCES dbo.DimDates(CalendarDateKey);&#xA;&#xA;ALTER TABLE dbo.FactSales ADD CONSTRAINT&#xA;&#x9;fkFactSalesShipDateDimDates FOREIGN KEY (ShipDateKey)&#xA;&#x9;REFERENCES dbo.DimDates (CalendarDateKey);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Pre-Load Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C3831A3F-E875-4657-9B51-606BEFD57226}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Pre-Load Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Pre-Load Sequence Container\Drop Foreign Keys Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{382DA8C8-A4E7-4C5E-9805-C6DB1FF3316C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Drop Foreign Keys Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{B9917561-C92E-4693-A4A4-405117480664}"
+              SQLTask:SqlStatementSource="-- 1) Drop Foreign Keys&#xA;ALTER TABLE dbo.FactSales &#xA;  DROP CONSTRAINT fkFactSalesToDimProducts ;&#xA;&#xA;ALTER TABLE dbo.FactSales &#xA;  DROP CONSTRAINT fkFactSalesToDimCustomers;&#xA;&#xA;ALTER TABLE dbo.FactSales &#xA;  DROP CONSTRAINT fkFactSalesOrderDateToDimDates;&#xA;&#xA;ALTER TABLE dbo.FactSales &#xA;  DROP CONSTRAINT fkFactSalesShipDateDimDates;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Pre-Load Sequence Container\Truncate Tables Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{20C691FA-7C7A-48AF-8F38-451088BE2513}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Tables Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{B9917561-C92E-4693-A4A4-405117480664}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="Truncate Table FactSales;&#xA;Truncate Table DimProducts;&#xA;Truncate Table DimCustomers;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Pre-Load Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{A65B4ABA-C94A-46BD-86EA-464157B5A51E}"
+          DTS:From="Package\Pre-Load Sequence Container\Drop Foreign Keys Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Pre-Load Sequence Container\Truncate Tables Execute SQL Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\RESET The DW Database Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{9BD98210-DF97-4828-9DD7-4478E6E8365E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="RESET The DW Database Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B9917561-C92E-4693-A4A4-405117480664}"
+          SQLTask:SqlStatementSource="--****************** [DWAdventureWorksLT2012v1] *********************--&#xA;-- This file will drop and create the DWAdventureWorksLT2012v1&#xA;-- database, with all its objects. &#xA;--********************************************************************--&#xA;&#xA;USE [master];&#xA;If Exists (Select Name from SysDatabases Where Name = 'DWAdventureWorksLT2012v1')&#xA;  Begin&#xA;   Alter database DWAdventureWorksLT2012v1 set single_user with rollback immediate;&#xA;   Drop database DWAdventureWorksLT2012v1;&#xA;  End&#xA;go&#xA;CREATE DATABASE DWAdventureWorksLT2012v1;&#xA;go&#xA;USE DWAdventureWorksLT2012v1;&#xA;go&#xA;&#xA;--********************************************************************--&#xA;-- Create the Tables&#xA;--********************************************************************--&#xA;--  Create a Null Lookup table:&#xA;CREATE -- Lookup Null Statuses&#xA;TABLE ETLNullStatuses&#x9;&#xA;( NullStatusID int Not Null  &#xA;, NullStatusDateKey date -- date = YYYY-MM-DD between 0001-01-01 through 9999-12-31&#xA;, NullStatusName nvarchar (50)&#xA;, NullStatusDescription nvarchar (1000)&#xA;CONSTRAINT [pkETLNullStatuses]  PRIMARY KEY Clustered (NullStatusID desc)&#xA;);&#xA;go&#xA;&#xA;--  Fill Null Lookup Table&#xA;INSERT -- Lookup data&#xA;INTO [DWAdventureWorksLT2012v1].[dbo].[ETLNullStatuses]&#xA;( NullStatusID&#xA;, NullStatusDateKey&#xA;, NullStatusName&#xA;, NullStatusDescription&#xA;) &#xA;VALUES&#xA;&#x9;  (-1,'9999-12-31','Unavaliable', 'Value is currently unknown, but should be available later')&#xA;&#x9;, (-2,'0001-01-01','Not Applicable', 'A value is not applicable to this item')&#xA;&#x9;, (-3,'0001-01-02','Unknown', 'Value is currently unknown, but may be available later')&#xA;&#x9;, (-4,'0001-01-03','Corrupt', 'Original value appeared corrupt or suspicious. As such it was removed from the reporting data')&#xA;&#x9;, (-5,'0001-01-04','Not Defined', 'A value could be entered, but the source data has not yet defined it')&#xA;;&#xA;go&#xA;&#xA;-- Create Date Dimension Lookup Table:&#xA;CREATE -- Dates Dimension  &#xA;TABLE DimDates&#x9;&#xA;( CalendarDateKey int Not Null CONSTRAINT [pkDimDates] PRIMARY KEY&#xA;, CalendarDateName nvarchar(50) Not Null &#xA;, CalendarYearMonthID int Not Null &#xA;, CalendarYearMonthName nvarchar(50) Not Null &#xA;, CalendarYearQuarterID int Not Null &#xA;, CalendarYearQuarterName nvarchar(50) Not Null &#xA;, CalendarYearID int Not Null &#xA;, CalendarYearName nvarchar(50) Not Null&#xA;, CalendarDate Date Not Null  &#xA;, FiscalDate Date Not Null &#xA;);&#xA;go&#xA;&#xA;-- Fill DimDates Lookup Table&#xA;-- Step a: Declare variables use in processing&#xA;SET NOCOUNT ON;&#xA;Declare @StartDate date; &#xA;Declare @EndDate date;&#xA;&#xA;-- Step b:  Fill the variable with values for the range of years needed&#xA;Select @StartDate = '01-01-' + Cast(Year(Min([OrderDate])) as nvarchar(50))&#xA;&#x9;From [AdventureWorksLT2012].[SalesLT].[SalesOrderHeader]; &#xA;Select @EndDate = '12-31-' + Cast(Year(Max([OrderDate]))  as nvarchar(50))&#xA;&#x9;From [AdventureWorksLT2012].[SalesLT].[SalesOrderHeader];&#xA;&#xA;-- Step c:  Use a while loop to add dates to the table&#xA;Declare @DateInProcess datetime = @StartDate;&#xA;&#xA;While @DateInProcess &lt;= @EndDate&#xA;&#x9;Begin&#xA;&#x9;--Add a row into the date dimension table for this date&#xA;&#x9;&#x9;Insert Into [DWAdventureWorksLT2012v1].[dbo].[DimDates] &#xA;&#x9;&#x9;( [CalendarDateKey]&#xA;&#x9;&#x9;, [CalendarDateName]&#xA;&#x9;&#x9;, [CalendarYearMonthID]&#xA;&#x9;&#x9;, [CalendarYearMonthName]&#xA;&#x9;&#x9;, [CalendarYearQuarterID]&#xA;&#x9;&#x9;, [CalendarYearQuarterName]&#xA;&#x9;&#x9;, [CalendarYearID]&#xA;&#x9;&#x9;, [CalendarYearName]&#xA;&#x9;&#x9;, [CalendarDate]&#xA;&#x9;&#x9;, [FiscalDate]&#xA;&#x9;&#x9;)&#xA;&#x9;&#x9;Values ( &#xA;&#x9;&#x9;  Convert(nvarchar(50), @DateInProcess, 112) -- [CalendarDateKey]&#xA;&#x9;&#x9;, DateName( weekday, @DateInProcess ) + ', ' + Convert(nvarchar(50), @DateInProcess, 110) --  [CalendarDateName]&#xA;&#x9;&#x9;, Left(Convert(nvarchar(50), @DateInProcess, 112), 6) -- [CalendarYearMonthKey]&#xA;&#x9;&#x9;, DateName( month, @DateInProcess ) -- [CalendarYearMonthName]&#xA;&#x9;&#x9;, Cast( Year(@DateInProcess) as nVarchar(50)) + '0' + DateName( quarter, @DateInProcess)   --[CalendarYearQuarterKey]&#xA;&#x9;&#x9;, 'Q' + DateName( quarter, @DateInProcess ) + ' - ' + Cast( Year(@DateInProcess) as nVarchar(50)) --[CalendarYearQuarterName]&#xA;&#x9;&#x9;, Year( @DateInProcess ) -- [CalendarYearKey] &#xA;&#x9;&#x9;, Cast( Year( @DateInProcess) as nVarchar(50) ) -- [CalendarYearName]&#xA;&#x9;&#x9;, Convert([Date], @DateInProcess) &#x9;-- [FiscalDateKey] &#x9;&#x9;&#x9;   &#xA;&#x9;&#x9;, Convert([Date], DateAdd(mm,-6,@DateInProcess)) &#x9;-- [FiscalDateKey] &#xA;&#x9;&#x9;);  &#xA;&#x9;&#x9;-- Add a day and loop again&#xA;&#x9;&#x9;Set @DateInProcess = DateAdd(d, 1, @DateInProcess);&#xA;&#x9;End&#xA;SET NOCOUNT ON;&#xA;go&#xA;&#xA;-- Create Other Dimension Tables:&#xA;CREATE &#xA;TABLE [dbo].[DimProducts]&#xA;( ProductKey int NOT NULL Primary Key IDENTITY(1, 1)&#xA;, [ProductID] [int]  NOT NULL&#xA;, [ProductName]  nvarchar(50) NOT NULL&#xA;, [ProductColor] nvarchar(50) NOT NULL&#xA;, [ProductSize] nvarchar(50) NOT NULL&#xA;, [ProductSellingStartDate] date NOT NULL&#xA;, [ProductSellingEndDate] date NOT NULL &#xA;, [ProductSellingEndDateText] nvarchar(50) NOT NULL&#xA;, [ProductCategoryID] int Not Null&#xA;, [ProductCategoryName] nvarchar(50) Not Null&#xA;, [ParentProductCategoryName] nvarchar(50) Not Null&#xA;)&#xA;;&#xA;&#xA;If (object_id('DimCustomers') is not null) Drop Table DimCustomers;&#xA;go&#xA;&#xA;CREATE&#xA;TABLE DimCustomers&#xA;( CustomerKey int NOT NULL Primary Key IDENTITY(1, 1)&#xA;, [CustomerID] int Not Null &#xA;, [ContactFullName] nvarchar(200) Not Null&#xA;, [CompanyName] nvarchar(200) Not Null&#xA;, [SalesPersonAlias] nvarchar(200) Not Null&#xA;);&#xA;go&#xA;&#xA;-- Create Fact Tables:&#xA;If (object_id('FactSales') is not null) Drop Table FactSales;&#xA;go&#xA;CREATE TABLE [dbo].[FactSales]&#xA;( [SalesOrderID] [int] NOT NULL&#xA;, [SalesOrderDetailID] [int] NOT NULL&#xA;, [OrderDateKey] [int] NOT NULL&#xA;, [ShipDateKey] [int] NOT NULL&#xA;, [CustomerKey] [int] NOT NULL&#xA;, [ProductKey] [int] NOT NULL&#xA;, [OrderQty] [smallint] NOT NULL&#xA;, [UnitPrice] [money] NOT NULL&#xA;, [UnitPriceDiscount] [money] NOT NULL&#xA;&#x9;CONSTRAINT [pk FactSales] PRIMARY KEY&#xA;&#x9;( [SalesOrderID]&#xA;&#x9;, [SalesOrderDetailID]&#xA;&#x9;, [OrderDateKey]&#xA;&#x9;, [ShipDateKey] &#xA;&#x9;, [CustomerKey]&#xA;&#x9;, [ProductKey]&#xA;&#x9;) &#xA;);&#xA;go&#xA;&#xA;--********************************************************************--&#xA;-- Create the Foreign Key CONSTRAINTs&#xA;--********************************************************************--&#xA;ALTER TABLE dbo.FactSales ADD CONSTRAINT&#xA;&#x9;fkFactSalesToDimProducts FOREIGN KEY (ProductKey) &#xA;&#x9;REFERENCES dbo.DimProducts&#x9;(ProductKey);&#xA;go&#xA;&#xA;ALTER TABLE dbo.FactSales ADD CONSTRAINT &#xA;&#x9;fkFactSalesToDimCustomers FOREIGN KEY (CustomerKey) &#xA;&#x9;REFERENCES dbo.DimCustomers (CustomerKey);&#xA;go&#xA;&#xA;ALTER TABLE dbo.FactSales ADD CONSTRAINT&#xA;&#x9;fkFactSalesOrderDateToDimDates FOREIGN KEY (OrderDateKey) &#xA;&#x9;REFERENCES dbo.DimDates(CalendarDateKey);&#xA;go&#xA;&#xA;ALTER TABLE dbo.FactSales ADD CONSTRAINT&#xA;&#x9;fkFactSalesShipDateDimDates FOREIGN KEY (ShipDateKey)&#xA;&#x9;REFERENCES dbo.DimDates (CalendarDateKey);&#xA;go&#xA;&#xA;&#xA;--********************************************************************--&#xA;-- Create the ETL Views&#xA;--********************************************************************--&#xA;Create View vETLDimProducts&#xA;AS&#xA;&#x9;SELECT &#xA;&#x9;  [ProductID] = T3.[ProductID]&#xA;&#x9;, [ProductName] = Cast( T3.[Name] as nvarchar(50))&#xA;&#x9;, [ProductColor] = Cast( ( CASE  &#xA;&#x9;&#x9;When ( (T3.[Color] is Null) AND (T2.Name = 'Components') ) Then 'Per Bike'&#xA;&#x9;&#x9;When ( (T3.[Color] is Null) AND (T2.Name = 'Accessories') ) Then 'Per Material'&#xA;&#x9;&#x9;Else T3.[Color] &#xA;&#x9;&#x9;End) as nvarchar(50))&#xA;&#x9;, [ProductSize] = Cast( IIF(T3.[Size] is Null, 'One Size Only', T3.[Size])  as nvarchar(50))&#xA;&#x9;, [ProductSellingStartDate] = T3.SellStartDate&#xA;&#x9;, [ProductSellingEndDate] =  IsNull( T3.SellEndDate ,'9999-12-31')&#xA;&#x9;, [ProductSellingEndDateText] = IsNull(T4.NullStatusName, T3.SellEndDate) &#xA;&#x9;, [ProductCategoryID] = T1.[ProductCategoryID]&#xA;&#x9;, [ProductCategoryName] = T1.[Name]&#xA;&#x9;, [ParentProductCategoryName] = T2.Name&#xA;&#x9;FROM [AdventureWorksLT2012].[SalesLT].[ProductCategory] as T1&#xA;&#x9;JOIN [AdventureWorksLT2012].[SalesLT].[ProductCategory] as T2&#xA;&#x9;  ON T1.ParentProductCategoryID = T2.ProductCategoryID &#xA;&#x9;JOIN [AdventureWorksLT2012].[SalesLT].[Product] as T3&#xA;&#x9;  ON T1.ProductCategoryID = T3.ProductCategoryID&#xA;&#x9;Left JOIN [DWAdventureWorksLT2012v1].[dbo].[ETLNullStatuses] as T4&#xA;&#x9; ON  IsNull( T3.SellEndDate ,'9999-12-31') = T4.NullStatusDateKey&#xA;&#x9;;&#xA;go&#xA;&#xA;CREATE VIEW vETLDimCustomers&#xA;AS&#xA;&#x9;SELECT &#xA;&#x9;  [CustomerID] = [CustomerID]&#xA;&#x9;, [ContactFullName] = Convert( nvarchar(200), [FirstName] + ' ' + [LastName])&#xA;&#x9;, [CompanyName] = Cast( [CompanyName] AS nvarchar(200) )&#xA;&#x9;, [SalesPersonAlias] = Cast( Substring( [SalesPerson], PatIndex( '%\%',[SalesPerson] ) + 1, 256 ) AS nvarchar(200) )&#xA;&#x9;FROM [AdventureWorksLT2012].[SalesLT].[Customer]&#xA;&#x9;;&#xA;go&#xA;&#xA;CREATE VIEW vETLFactSales&#xA;AS&#xA;&#x9;SELECT &#xA;&#x9;  SalesOrderID = T2.SalesOrderID&#xA;&#x9;, SalesOrderDetailID = T1.SalesOrderDetailID&#xA;&#x9;, OrderDateKey = T6.CalendarDateKey&#xA;&#x9;, ShipDateKey = T5.CalendarDateKey&#xA;&#x9;, CustomerKey = T4.CustomerKey&#xA;&#x9;, ProductKey = T3.ProductKey&#xA;&#x9;, OrderQty = T1.OrderQty&#xA;&#x9;, UnitPrice = T1.UnitPrice&#xA;&#x9;, UnitPriceDiscount = T1.UnitPriceDiscount&#xA;&#x9;FROM  [AdventureWorksLT2012].SalesLT.SalesOrderDetail as T1&#xA;&#x9;JOIN [AdventureWorksLT2012].SalesLT.SalesOrderHeader as T2&#xA;&#x9;  ON T1.SalesOrderID = T2.SalesOrderID&#xA;&#x9;JOIN DWAdventureWorksLT2012v1.dbo.DimProducts as T3&#xA;&#x9; ON T1.ProductID = T3.ProductID&#xA;&#x9;JOIN DWAdventureWorksLT2012v1.dbo.DimCustomers as T4&#xA;&#x9; ON T2.CustomerID = T4.CustomerID&#xA;&#x9;JOIN DWAdventureWorksLT2012v1.dbo. DimDates as T5&#xA;&#x9; ON Cast(T2.ShipDate as date) = Cast(T5.CalendarDate as date)&#xA;&#x9;JOIN DWAdventureWorksLT2012v1.dbo. DimDates as T6&#xA;&#x9; ON Cast(T2.OrderDate as date) = Cast(T6.CalendarDate as date)&#xA;&#x9;;&#xA;go&#xA;&#xA;&#xA;--********************************************************************--&#xA;-- Create the ETL Stored Procedures&#xA;--********************************************************************--&#xA;&#xA;-- DimProducts ETL processing code --&#xA;CREATE  &#xA;PROCEDURE pETLDimProducts&#xA;AS&#xA;&#x9;/**************************************************************&#xA;&#x9;Desc: &lt;Desc Goes Here&gt;&#xA;&#x9;ChangeLog: When, Who, What&#xA;&#x9;20160101,RRoot,Created Procedure  &#xA;&#x9;**************************************************************/&#xA;Begin -- Procedure Code&#xA; Declare &#xA;   @RC int = 0;&#xA; Begin Try &#xA;  Begin Transaction; &#xA;  -- ETL Code  -------------------------------------------------------------------&#xA;&#x9;  INSERT INTO [dbo].[DimProducts]&#xA;&#x9;( [ProductID]&#xA;&#x9;, [ProductName]&#xA;&#x9;, [ProductColor]&#xA;&#x9;, [ProductSize]&#xA;&#x9;, [ProductSellingStartDate]&#xA;&#x9;, [ProductSellingEndDate]&#xA;&#x9;, [ProductSellingEndDateText] &#xA;&#x9;, [ProductCategoryID]&#xA;&#x9;, [ProductCategoryName]&#xA;&#x9;, [ParentProductCategoryName]&#xA;&#x9;)&#xA;&#x9;SELECT &#xA;&#x9;  [ProductID] &#xA;&#x9;, [ProductName] &#xA;&#x9;, [ProductColor] &#xA;&#x9;, [ProductSize] &#xA;&#x9;, [ProductSellingStartDate] &#xA;&#x9;, [ProductSellingEndDate] &#xA;&#x9;, [ProductSellingEndDateText]&#xA;&#x9;, [ProductCategoryID] &#xA;&#x9;, [ProductCategoryName] &#xA;&#x9;, [ParentProductCategoryName]&#xA;&#x9;FROM DWAdventureWorksLT2012v1.dbo.vETLDimProducts&#xA;&#x9;;&#xA;   -- ETL Code  -------------------------------------------------------------------&#xA;  Commit Transaction;&#xA;  Set @RC = 100; -- Success&#xA; End Try&#xA; Begin Catch&#xA;  Rollback Tran;&#xA;  Set @RC = -100; -- Failure&#xA; End Catch&#xA; Return @RC;&#xA;End -- Procedure Code&#xA;;&#xA;go&#xA;&#xA;-- DimCustomers ETL processing code -- &#xA;CREATE &#xA;PROCEDURE pETLDimCustomers&#xA;AS&#xA;&#x9;/**************************************************************&#xA;&#x9;Desc: &lt;Desc Goes Here&gt;&#xA;&#x9;ChangeLog: When, Who, What&#xA;&#x9;20160101,RRoot,Created Procedure  &#xA;&#x9;**************************************************************/&#xA;Begin -- Procedure Code&#xA; Declare &#xA;   @RC int = 0;&#xA; Begin Try &#xA;  Begin Transaction; &#xA;  -- ETL Code  -------------------------------------------------------------------&#xA;&#x9;INSERT INTO [DWAdventureWorksLT2012v1].[dbo].[DimCustomers]&#xA;&#x9;( [CustomerID]&#xA;&#x9;, [ContactFullName]&#xA;&#x9;, [CompanyName]&#xA;&#x9;, [SalesPersonAlias]&#xA;&#x9;)&#xA;&#x9;SELECT &#xA;&#x9;  [CustomerID]&#xA;&#x9;, [ContactFullName]&#xA;&#x9;, [CompanyName]&#xA;&#x9;, [SalesPersonAlias]&#xA;&#x9;FROM DWAdventureWorksLT2012v1.dbo.vETLDimCustomers&#xA;&#x9;;  &#xA;  -- ETL Code  -------------------------------------------------------------------&#xA;  Commit Transaction;&#xA;  Set @RC = 100; -- Success&#xA; End Try&#xA; Begin Catch&#xA;  Rollback Tran;&#xA;  Set @RC = -100; -- Failure&#xA; End Catch&#xA; Return @RC;&#xA;End -- Procedure Code&#xA;;&#xA;go&#xA;&#xA;-- FactSales ETL processing code -- &#xA;CREATE&#xA;PROCEDURE pETLFactSales&#xA;AS&#xA;&#x9;/**************************************************************&#xA;&#x9;Desc: &lt;Desc Goes Here&gt;&#xA;&#x9;ChangeLog: When, Who, What&#xA;&#x9;20160101,RRoot,Created Procedure  &#xA;&#x9;**************************************************************/&#xA;Begin -- Procedure Code&#xA; Declare &#xA;   @RC int = 0;&#xA; Begin Try &#xA;  Begin Transaction; &#xA;  -- ETL Code  -------------------------------------------------------------------&#xA;  &#x9;  INSERT INTO [dbo].[FactSales]&#xA;&#x9;( [SalesOrderID]&#xA;&#x9;, [SalesOrderDetailID]&#xA;&#x9;, [OrderDateKey]&#xA;&#x9;, [ShipDateKey]&#xA;&#x9;, [CustomerKey] &#xA;&#x9;, [ProductKey] &#xA;&#x9;, [OrderQty]&#xA;&#x9;, [UnitPrice]&#xA;&#x9;, [UnitPriceDiscount]&#xA;&#x9;) &#xA;&#x9;SELECT &#xA;&#x9;  SalesOrderID&#xA;&#x9;, SalesOrderDetailID&#xA;&#x9;, OrderDateKey&#xA;&#x9;, ShipDateKey&#xA;&#x9;, CustomerKey&#xA;&#x9;, ProductKey&#xA;&#x9;, OrderQty&#xA;&#x9;, UnitPrice&#xA;&#x9;, UnitPriceDiscount&#xA;&#x9;FROM DWAdventureWorksLT2012v1.dbo.vETLFactSales&#xA;&#x9;; &#xA;  -- ETL Code  -------------------------------------------------------------------&#xA;  Commit Transaction;&#xA;  Set @RC = 100; -- Success&#xA; End Try&#xA; Begin Catch&#xA;  Rollback Tran;&#xA;  Set @RC = -100; -- Failure&#xA; End Catch&#xA; Return @RC;&#xA;End -- Procedure Code&#xA;;&#xA;go &#xA;&#xA;Select 'Version 1 of the database was created';" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DB4E6D65-1712-48D7-AE83-1C2314837F97}"
+      DTS:From="Package\Pre-Load Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Dimension Tables Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0FECE642-EC62-4744-AF62-3D2BAC1F2C37}"
+      DTS:From="Package\Load Dimension Tables Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Fill Fact Tables Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{C35DB804-3DB9-41E6-BBA1-1D2657D421B5}"
+      DTS:From="Package\Fill Fact Tables Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Post-Load Sequence Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task"
+          TopLeft="23,21" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="277,88"
+          Size="277,131"
+          Id="Package\Fill Fact Tables Sequence Container"
+          TopLeft="84.9393939393941,335.545454545455" />
+        <NodeLayout
+          Size="239,42"
+          Id="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task"
+          TopLeft="19,76" />
+        <NodeLayout
+          Size="239,42"
+          Id="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task"
+          TopLeft="19,22" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="316,173"
+          Size="316,216"
+          Id="Package\Load Dimension Tables Sequence Container"
+          TopLeft="407.333333333333,116.386363636364" />
+        <NodeLayout
+          Size="288,42"
+          Id="Package\Post-Load Sequence Container\Replace Foreign Keys Execute SQL Task"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="314,63"
+          Size="314,106"
+          Id="Package\Post-Load Sequence Container"
+          TopLeft="409.113636363636,335.765151515152" />
+        <NodeLayout
+          Size="253,42"
+          Id="Package\Pre-Load Sequence Container\Drop Foreign Keys Execute SQL Task"
+          TopLeft="14.2727272727273,9.24242424242425" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Pre-Load Sequence Container\Truncate Tables Execute SQL Task"
+          TopLeft="22.3939393939395,78.9090909090909" />
+        <EdgeLayout
+          Id="Package\Pre-Load Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="142.083333333333,51.2424242424242">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.6666666666667"
+              Start="0,0"
+              End="0,20.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="285,155"
+          Size="285,198"
+          Id="Package\Pre-Load Sequence Container"
+          TopLeft="81.1666666666667,114.909090909091" />
+        <NodeLayout
+          Size="286,42"
+          Id="Package\RESET The DW Database Execute SQL Task"
+          TopLeft="90.5,2.75" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="366.166666666667,213.909090909091">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="41.1666666666663,-24.1893939393937"
+              Start="0,0"
+              End="33.6666666666663,-24.1893939393937">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="20.518382352941,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.518382352941,0"
+                    Point2="24.518382352941,0"
+                    Point3="24.518382352941,-4" />
+                  <mssgle:LineSegment
+                    End="24.518382352941,-20.1893939393937" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.518382352941,-20.1893939393937"
+                    Point2="24.518382352941,-24.1893939393937"
+                    Point3="28.518382352941,-24.1893939393937" />
+                  <mssgle:LineSegment
+                    End="33.6666666666663,-24.1893939393937" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="407.333333333333,259.053030303031">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-45.3939393939389,121.492424242424"
+              Start="0,0"
+              End="-37.8939393939389,121.492424242424">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5638725997468,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5638725997468,0"
+                    Point2="-22.5638725997468,0"
+                    Point3="-22.5638725997468,4" />
+                  <mssgle:LineSegment
+                    End="-22.5638725997468,117.492424242424" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5638725997468,117.492424242424"
+                    Point2="-22.5638725997468,121.492424242424"
+                    Point3="-26.5638725997468,121.492424242424" />
+                  <mssgle:LineSegment
+                    End="-37.8939393939389,121.492424242424" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="361.939393939394,421.545454545455">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47.1742424242419,-32.780303030303"
+              Start="0,0"
+              End="39.6742424242419,-32.780303030303">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="15.2112299465239,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.2112299465239,0"
+                    Point2="19.2112299465239,0"
+                    Point3="19.2112299465239,-4" />
+                  <mssgle:LineSegment
+                    End="19.2112299465239,-28.780303030303" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.2112299465239,-28.780303030303"
+                    Point2="19.2112299465239,-32.780303030303"
+                    Point3="23.2112299465239,-32.780303030303" />
+                  <mssgle:LineSegment
+                    End="39.6742424242419,-32.780303030303" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="224,42"
+          Id="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source"
+          TopLeft="170,68" />
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination"
+          TopLeft="131,226" />
+        <EdgeLayout
+          Id="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task.Paths[ADO NET Source Output]"
+          TopLeft="282,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-38,116"
+              Start="0,0"
+              End="-38,108.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54"
+                    Point2="0,58"
+                    Point3="-4,58" />
+                  <mssgle:LineSegment
+                    End="-34,58" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-34,58"
+                    Point2="-38,58"
+                    Point3="-38,62" />
+                  <mssgle:LineSegment
+                    End="-38,108.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="253,42"
+          Id="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source"
+          TopLeft="108,56" />
+        <NodeLayout
+          Size="251,42"
+          Id="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination"
+          TopLeft="151,178" />
+        <EdgeLayout
+          Id="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task.Paths[ADO NET Source Output]"
+          TopLeft="234.5,98">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="42,80"
+              Start="0,0"
+              End="42,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36"
+                    Point2="0,40"
+                    Point3="4,40" />
+                  <mssgle:LineSegment
+                    End="38,40" />
+                  <mssgle:CubicBezierSegment
+                    Point1="38,40"
+                    Point2="42,40"
+                    Point3="42,44" />
+                  <mssgle:LineSegment
+                    End="42,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="244,42"
+          Id="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source"
+          TopLeft="104,30" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination"
+          TopLeft="119,140" />
+        <EdgeLayout
+          Id="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task.Paths[ADO NET Source Output]"
+          TopLeft="226,72">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14,68"
+              Start="0,0"
+              End="14,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30"
+                    Point2="0,34"
+                    Point3="4,34" />
+                  <mssgle:LineSegment
+                    End="10,34" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10,34"
+                    Point2="14,34"
+                    Point3="14,38" />
+                  <mssgle:LineSegment
+                    End="14,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\vETLDimProducts ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension Tables Sequence Container\Fill DimProducts Data Flow Task\DimProducts ADO NET Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\vETLDimCustomers ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension Tables Sequence Container\Fill DimCustomers Data Flow Task\DimCustomers ADO NET Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\vETLFactSale ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Fact Tables Sequence Container\Fill FactSales Data Flow Task\FactSales ADO NET Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
